@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const restauranteRouter = require('./RestauranteController')
 
 const app = express();
 const PORT = 5000;
@@ -7,7 +8,7 @@ const PORT = 5000;
 app.use(express.json());
 
 // Conexión a la base de datos
-mongoose.connect('mongodb+srv://albargrrss:u9pa0KMdm5QLnyFu@clusterrelapp.ancnn.mongodb.net/Relapp', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://albargrrss:u9pa0KMdm5QLnyFu@clusterrelapp.ancnn.mongodb.net/Relapp', {})
     .then(() => console.log('Conectado a MongoDB'))
     .catch(err => console.error('Error en la conexión:', err));
 
@@ -15,3 +16,5 @@ mongoose.connect('mongodb+srv://albargrrss:u9pa0KMdm5QLnyFu@clusterrelapp.ancnn.
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+app.use('/restaurantes', restauranteRouter);
