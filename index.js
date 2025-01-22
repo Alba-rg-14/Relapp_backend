@@ -15,7 +15,7 @@ app.use(cors());
 
 // Ruta básica para manejar GET /
 app.get('/', (req, res) => {
-    res.send("¡Bienvenido a la API del Parcial 2!");
+    res.send("¡Bienvenido a la API del Parcial 3!");
 });
 
 
@@ -33,11 +33,6 @@ app.use("/mapas", mapasRouter);
 // Rutas
 const restauranteRouter = require("./Controller/RestauranteRouter");
 app.use("/restaurantes", restauranteRouter);
-
-
-
-
-
 
 
 // Iniciar servidor
