@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const connectBD = require("./bd"); // Importa la función de conexión
 
+require("dotenv").config();
+
 const app = express();
 const PORT = 5000;
 
@@ -22,13 +24,12 @@ app.get('/', (req, res) => {
 
 const logRouter = require("./Controller/logRouter");
 app.use("/log", logRouter);
-/*
+
 const imagenesRouter = require("./Controller/imagenesRouter");
 app.use("/imagenes", imagenesRouter);
 
 const mapasRouter = require("./Controller/mapasRouter");
 app.use("/mapas", mapasRouter);
-*/
 
 // Rutas
 const restauranteRouter = require("./Controller/RestauranteRouter");
