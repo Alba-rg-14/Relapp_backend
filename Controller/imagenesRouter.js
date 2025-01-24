@@ -11,11 +11,11 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-console.log("Cloudinary Configuración:", {
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// console.log("Cloudinary Configuración:", {
+//     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//     api_key: process.env.CLOUDINARY_API_KEY,
+//     api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
 
 // Configuración de multer para manejar archivos
 const upload = multer({ dest: "uploads/" }); // Carpeta temporal para archivos
