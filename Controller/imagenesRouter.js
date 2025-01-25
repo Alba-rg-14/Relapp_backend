@@ -22,6 +22,14 @@ const upload = multer({ dest: "uploads/" }); // Carpeta temporal para archivos
 
 // Ruta para subir imágenes
 router.post("/", upload.single("image"), async (req, res) => {
+    console.log("Archivo recibido:", req.file); // Log del archivo recibido
+    console.log("Cuerpo recibido:", req.body);  // Si envías más datos en el cuerpo
+
+    if (!req.file) {
+        return res.status(400).json({ message: "Debe proporcionar una imagen" });
+    }
+
+
     try {
         const file = req.file; // Archivo enviado desde el frontend
 

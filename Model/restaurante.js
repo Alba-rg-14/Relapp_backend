@@ -35,7 +35,7 @@ const RestauranteSchema = new mongoose.Schema({
     },
     imagenURL: {
         type: String,
-        required: true
+        required: false
     },
     visitado: {
         type: Boolean,

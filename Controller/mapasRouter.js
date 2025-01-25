@@ -54,4 +54,38 @@ router.get("/:lat/:lon", async (req, res) => {
     }
 });
 
+router.post("/", async (req, res) => {
+    try {
+        const { coordenadas } = req.body;
+
+        if (!coordenadas || !Array.isArray(coordenadas) || coordenadas.length === 0) {
+            return res.status(400).json({ message: "Debe proporcionar un array de coordenadas válido" });
+        }
+
+        // Construir bounding box con todas las coordenadas
+        const latitudes = coordenadas.map((c) => c.lat);
+        const longitudes = coordenadas.map((c) => c.lon);
+
+        const minLat = Math.min(...latitudes);
+        const maxLat = Math.max(...latitudes);
+        const minLon = Math.min(...longitudes);
+        const maxLon = Math.max(...longitudes);
+
+        const bbox = `${minLon},${minLat},${maxLon},${maxLat}`;
+
+        // Agregar marcadores
+        const markers = coordenadas
+            .map((c) => `&marker=${c.lat},${c.lon}`)
+            .join(""); // Concatenar todos los marcadores
+
+        const iframeUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik${markers}`;
+
+        return res.json({ iframeUrl });
+    } catch (error) {
+        console.error("Error al generar el iframe URL:", error);
+        return res.status(500).json({ message: "Error en el servidor", error: error.message });
+    }
+});
+
+
 module.exports = router;

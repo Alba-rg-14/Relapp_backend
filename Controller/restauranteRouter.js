@@ -56,14 +56,21 @@ restauranteRouter.delete('/eliminar/:id', async (req, res) => {
 });
 
 //Obtener restaurante por nombre
-restauranteRouter.get('/nombre/:nombre', async (req, res) => {
+restauranteRouter.get("/nombre/:nombre", async (req, res) => {
     try {
-        const restaurantes = await Restaurante.find({ nombre: req.params.nombre });
-        res.json(restaurantes);
+        const { nombre } = req.params;
+        console.log("Buscando por nombre:", nombre); // Verifica el filtro que llega
+        const restaurantes = await Restaurante.find({
+            nombre: { $regex: nombre, $options: "i" }, // Búsqueda insensible a mayúsculas/minúsculas
+        });
+        console.log("Resultados encontrados:", restaurantes); // Verifica los resultados
+        res.status(200).json(restaurantes);
     } catch (error) {
-        res.json({ mensaje: error });
+        console.error("Error al buscar restaurantes:", error);
+        res.status(500).json({ message: "Error al buscar restaurantes" });
     }
 });
+
 
 //Obtener restaurante cercano por coordenadas
 restauranteRouter.get('/cercano/:latitud/:longitud', async (req, res) => {
